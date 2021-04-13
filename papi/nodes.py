@@ -1,5 +1,4 @@
 from abc import ABCMeta
-from numbers import Number
 from typing import Any, Dict, Optional
 
 import valohai_yaml
