@@ -23,4 +23,4 @@ Dephell for compatibility with classic Python package management.
 You should be able to install development dependencies both with Poetry and `pip install -e .[dev]`.
 
 - To format code, please be sure to run `poe format`.
-- This package aims to be fully type-valid in Mypy's eyes, too. You can run Mypy with `poe check`.
+- This package aims to be fully type-valid in Mypy's eyes, too. You can run Mypy with `poe check-types`.
