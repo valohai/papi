@@ -34,6 +34,6 @@ jobs:
       run: poetry install
     - name: Run format check
       run: poetry run poe check-format
-    - name: Run type check
-      run: poetry run poe check-types
+    - name: Run lint
+      run: poetry run poe lint
 

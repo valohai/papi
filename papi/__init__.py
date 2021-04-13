@@ -3,9 +3,8 @@ from typing import Dict, List, Optional, TypeVar
 
 from valohai_yaml.objs import Config, Pipeline, Step
 
-from papi.base import PapiObject
 from papi.contexts import APIContext, YAMLContext
-from papi.edges import Edge, EdgeDescriptor
+from papi.edges import Edge
 from papi.nodes import ExecutionNode, Node, TaskNode
 
 __all__ = ["Papi"]

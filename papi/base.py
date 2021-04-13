@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from .contexts import APIContext, YAMLContext
 
 if TYPE_CHECKING:
-    import papi
+    import papi  # noqa
 
 
 class PapiObject(metaclass=abc.ABCMeta):
