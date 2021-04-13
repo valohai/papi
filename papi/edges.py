@@ -29,9 +29,9 @@ class Edge(PapiObject):
 
     def to_yaml(self, yaml_context: YAMLContext):
         return valohai_yaml.objs.Edge(
-            source='.'.join((self.source_node, self.source_type, self.source_key)),
-            target='.'.join((self.target_node, self.target_type, self.target_key)),
-            configuration=self.configuration
+            source=".".join((self.source_node, self.source_type, self.source_key)),
+            target=".".join((self.target_node, self.target_type, self.target_key)),
+            configuration=self.configuration,
         )
 
 

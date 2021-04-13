@@ -1,7 +1,7 @@
 from collections import Counter
 from typing import Dict, List, Optional, TypeVar
 
-from valohai_yaml.objs import Config, Step, Pipeline
+from valohai_yaml.objs import Config, Pipeline, Step
 
 from papi.base import PapiObject
 from papi.contexts import APIContext, YAMLContext
@@ -18,7 +18,7 @@ class Papi:
     edges: List[Edge]
     counters: Counter
 
-    def __init__(self, config: Config, *, name: str = 'Pipeline'):
+    def __init__(self, config: Config, *, name: str = "Pipeline"):
         self.name = str(name)
         self.config = config
         self.nodes = {}
@@ -73,4 +73,3 @@ class Papi:
             nodes=[n.to_yaml(yaml_context=yaml_context) for n in self.nodes.values()],
             edges=[e.to_yaml(yaml_context=yaml_context) for e in self.edges],
         )
-
