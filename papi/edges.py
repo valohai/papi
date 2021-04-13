@@ -1,6 +1,8 @@
 import dataclasses
 from typing import TYPE_CHECKING
 
+import valohai_yaml
+
 from papi import YAMLContext
 from papi.base import PapiObject
 from papi.contexts import APIContext
@@ -26,7 +28,11 @@ class Edge(PapiObject):
         return payload
 
     def to_yaml(self, yaml_context: YAMLContext):
-        raise NotImplementedError(f"{self}.to_yaml() has not been implemented")
+        return valohai_yaml.objs.Edge(
+            source='.'.join((self.source_node, self.source_type, self.source_key)),
+            target='.'.join((self.target_node, self.target_type, self.target_key)),
+            configuration=self.configuration
+        )
 
 
 @dataclasses.dataclass(frozen=True)

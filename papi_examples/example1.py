@@ -5,7 +5,7 @@ from papi_examples.utils import read_config
 
 
 def main():
-    papi = Papi(read_config("example1.yaml"))
+    papi = Papi(name="mypipeline", config=read_config("example1.yaml"))
 
     # Define nodes
     extract = papi.execution("Batch feature extraction")
