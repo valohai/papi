@@ -2,6 +2,7 @@ from abc import ABCMeta
 from numbers import Number
 from typing import Any, Dict, Optional
 
+import valohai_yaml
 from valohai_yaml.objs import Step
 from valohai_yaml.utils import listify
 
@@ -63,6 +64,12 @@ class ExecutionNode(Node):
             },
         }
 
+    def to_yaml(self, yaml_context):
+        return valohai_yaml.objs.ExecutionNode(
+            name=self.name,
+            step=self.step.name,
+        )
+
     def input(self, key: str) -> EdgeDescriptor:
         if key not in self.step.inputs:
             raise ValueError(f"{key} not known in {self.step.name}")
@@ -120,3 +127,9 @@ class TaskNode(ExecutionNode):
             )
         )
         return payload
+
+    def to_yaml(self, yaml_context):
+        return valohai_yaml.objs.TaskNode(
+            name=self.name,
+            step=self.step.name,
+        )
