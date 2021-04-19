@@ -23,7 +23,7 @@ setup(
     license="MIT",
     packages=["papi"],
     package_dir={"": "."},
-    package_data={},
+    package_data={"papi": ["*.typed"]},
     install_requires=["valohai-yaml==0.*,>=0.14.1"],
     extras_require={
         "dev": [
