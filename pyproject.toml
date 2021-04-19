@@ -1,15 +1,17 @@
 [tool.dephell.main]
 from = {format = "poetry", path = "pyproject.toml"}
-#envs = ["main"]
 to = {format = "setuppy", path = "setup.py"}
 
 [tool.poetry]
-name = "papi"
+name = "valohai-papi"
 version = "0.1.0"
 homepage = "https://github.com/valohai/papi"
 description = "Experimental imperative Valohai pipeline API"
 authors = ["Aarni Koskela <aarni@valohai.com>"]
 license = "MIT"
+packages = [
+  { include = "papi" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
