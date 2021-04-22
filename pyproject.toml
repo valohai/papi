@@ -4,7 +4,7 @@ to = {format = "setuppy", path = "setup.py"}
 
 [tool.poetry]
 name = "valohai-papi"
-version = "0.1.0"
+version = "0.1.1"
 homepage = "https://github.com/valohai/papi"
 description = "Experimental imperative Valohai pipeline API"
 authors = ["Aarni Koskela <aarni@valohai.com>"]
@@ -16,6 +16,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.6.1"
 valohai-yaml = "^0.14.1"
+dataclasses = {version = ">=0.6", python = "<3.7"}
 
 [tool.poetry.dev-dependencies]
 dephell = "^0.8.3"
@@ -34,6 +35,10 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poe.tasks]
+make-setup = [
+  { cmd = "dephell deps convert" },
+  { cmd = "black setup.py" },
+]
 check-format = [
   { cmd = "black --check ." },
   { cmd = "isort --check ." },
