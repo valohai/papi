@@ -114,6 +114,43 @@ class TaskNode(ExecutionNode):
         }
         return self
 
+    def multiple_parameter(
+        self,
+        name: str,
+        choices: list,
+    ) -> "TaskNode":
+        self._check_parameter_name(name)
+        self.parameters[name] = {
+            "style": "multiple",
+            "rules": {
+                "items": choices,
+            },
+        }
+        return self
+
+    def random_parameter(
+        self,
+        name: str,
+        *,
+        min: float,
+        max: float,
+        count: Optional[int] = 1,
+        integerify: bool = False,
+        seed: Optional[int] = None,
+    ) -> "TaskNode":
+        self._check_parameter_name(name)
+        self.parameters[name] = {
+            "style": "random",
+            "rules": {
+                "min": min,
+                "max": max,
+                "count": count,
+                "integerify": bool(integerify),
+                "seed": seed,
+            },
+        }
+        return self
+
     def to_api(self, api_context):
         payload = super().to_api(api_context)
         payload["template"].update(
