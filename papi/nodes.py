@@ -107,8 +107,8 @@ class TaskNode(ExecutionNode):
         self.parameters[name] = {
             "style": "linear",
             "rules": {
-                "min": float(min),
-                "max": float(max),
+                "start": float(min),
+                "end": float(max),
                 "step": float(step),
             },
         }
