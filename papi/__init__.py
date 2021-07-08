@@ -26,8 +26,11 @@ class Papi:
 
     def _count(self, key: str) -> str:
         self.counters[key] += 1
+        index = self.counters[key]
         key_l = key.lower().replace(" ", "_")
-        return f"{key_l}_{self.counters[key]}"
+        if index > 1:
+            return f"{key_l}_{index}"
+        return key_l
 
     def _register_node(self, node: SomeNode) -> SomeNode:
         if node.name in self.nodes:
