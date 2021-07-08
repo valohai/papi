@@ -36,4 +36,5 @@ jobs:
       run: poetry run poe check-format
     - name: Run lint
       run: poetry run poe lint
-
+    - name: Run test
+      run: poetry run py.test --cov papi .
