@@ -18,10 +18,22 @@ class Node(PapiObject, metaclass=ABCMeta):
         self.name = name
 
     def output(self, key: str) -> EdgeDescriptor:
-        return EdgeDescriptor(node=self, type="output", key=key)
+        return self.output_edge(key)
 
     def input(self, key: str) -> EdgeDescriptor:
+        return self.input_edge(key)
+
+    def output_edge(self, key: str) -> EdgeDescriptor:
+        return EdgeDescriptor(node=self, type="output", key=key)
+
+    def input_edge(self, key: str) -> EdgeDescriptor:
         return EdgeDescriptor(node=self, type="input", key=key)
+
+    def parameter_edge(self, key: str) -> EdgeDescriptor:
+        return EdgeDescriptor(node=self, type="parameter", key=key)
+
+    def metadata_edge(self, key: str) -> EdgeDescriptor:
+        return EdgeDescriptor(node=self, type="metadata", key=key)
 
 
 class ExecutionNode(Node):
