@@ -751,7 +751,7 @@ brotli = ["brotlipy (>=0.6.0)"]
 
 [[package]]
 name = "valohai-yaml"
-version = "0.14.1"
+version = "0.15.0"
 description = "Valohai.yaml validation and parsing"
 category = "main"
 optional = false
@@ -760,9 +760,6 @@ python-versions = ">=3.5"
 [package.dependencies]
 jsonschema = "*"
 PyYAML = "*"
-
-[package.extras]
-dev = ["flake8", "isort", "pydocstyle", "pytest-cov", "pytest (>=6.0)"]
 
 [[package]]
 name = "yarl"
@@ -800,7 +797,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.1"
-content-hash = "679ddb726f79acbee5891537875e9ecddb10197e3f5f692400b67809d8d4eb33"
+content-hash = "2c96e08dbde00fe116c8e13007c083384b9134f5eb4756f9e0d95c4c5dacac65"
 
 [metadata.files]
 aiohttp = [
@@ -1331,8 +1328,8 @@ urllib3 = [
     {file = "urllib3-1.26.4.tar.gz", hash = "sha256:e7b021f7241115872f92f43c6508082facffbd1c048e3c6e2bb9c2a157e28937"},
 ]
 valohai-yaml = [
-    {file = "valohai-yaml-0.14.1.tar.gz", hash = "sha256:f7f948b2cea867962409ff36ac2b961cf08e0462410c9c7c45054c1c8db8d500"},
-    {file = "valohai_yaml-0.14.1-py3-none-any.whl", hash = "sha256:7ed3f27a9f63c66c997fff176bec00ab17c6a26a37be6ab127965b741cd0aaf3"},
+    {file = "valohai-yaml-0.15.0.tar.gz", hash = "sha256:c3f39742d32f5bf87d731d2cefc9e7fcbe5a0df8566144ec7ba71ada320435df"},
+    {file = "valohai_yaml-0.15.0-py3-none-any.whl", hash = "sha256:242706b1e07a03fcc371cc523ce4e6a34f6cfca263accb147b4b28f3518ecaf0"},
 ]
 yarl = [
     {file = "yarl-1.6.3-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:0355a701b3998dcd832d0dc47cc5dedf3874f966ac7f870e0f3a6788d802d434"},

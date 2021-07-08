@@ -14,7 +14,7 @@ readme = ""
 setup(
     long_description=readme,
     name="valohai-papi",
-    version="0.1.1",
+    version="0.1.2",
     description="Experimental imperative Valohai pipeline API",
     python_requires="==3.*,>=3.6.1",
     project_urls={"homepage": "https://github.com/valohai/papi"},
@@ -26,7 +26,7 @@ setup(
     package_data={"papi": ["*.typed"]},
     install_requires=[
         'dataclasses>=0.6; python_version < "3.7"',
-        "valohai-yaml==0.*,>=0.14.1",
+        "valohai-yaml>=0.14.1",
     ],
     extras_require={
         "dev": [
