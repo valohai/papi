@@ -107,9 +107,46 @@ class TaskNode(ExecutionNode):
         self.parameters[name] = {
             "style": "linear",
             "rules": {
-                "min": float(min),
-                "max": float(max),
+                "start": float(min),
+                "end": float(max),
                 "step": float(step),
+            },
+        }
+        return self
+
+    def multiple_parameter(
+        self,
+        name: str,
+        choices: list,
+    ) -> "TaskNode":
+        self._check_parameter_name(name)
+        self.parameters[name] = {
+            "style": "multiple",
+            "rules": {
+                "items": choices,
+            },
+        }
+        return self
+
+    def random_parameter(
+        self,
+        name: str,
+        *,
+        min: float,
+        max: float,
+        count: Optional[int] = 1,
+        integerify: bool = False,
+        seed: Optional[int] = None,
+    ) -> "TaskNode":
+        self._check_parameter_name(name)
+        self.parameters[name] = {
+            "style": "random",
+            "rules": {
+                "min": min,
+                "max": max,
+                "count": count,
+                "integerify": bool(integerify),
+                "seed": seed,
             },
         }
         return self
