@@ -45,7 +45,7 @@ class Papi:
         )
 
     def _get_step(self, name) -> Step:
-        step_object: Step = self.config.get_step_by(name=name)
+        step_object: Optional[Step] = self.config.get_step_by(name=name)
         if not step_object:
             raise ValueError(f"no such step {name} in config")
         return step_object
