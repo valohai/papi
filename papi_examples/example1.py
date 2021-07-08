@@ -23,6 +23,9 @@ def main():
     # Get dict suitable for passing to Create Pipeline API
     pprint(papi.to_api())
 
+    # Get Pipeline object for YAML
+    papi.to_yaml()
+
 
 if __name__ == "__main__":
     main()
