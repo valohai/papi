@@ -5,6 +5,7 @@ from valohai_yaml.objs import Config, Pipeline, Step
 
 from papi.contexts import APIContext, YAMLContext
 from papi.edges import Edge
+from papi.excs import DuplicateNode, MissingObject
 from papi.nodes import ExecutionNode, Node, TaskNode
 
 __all__ = ["Papi"]
@@ -31,7 +32,7 @@ class Papi:
 
     def _register_node(self, node: SomeNode) -> SomeNode:
         if node.name in self.nodes:
-            raise ValueError(f"Duplicate node {node}")
+            raise DuplicateNode(f"Duplicate node {node}", papi=self)
         self.nodes[node.name] = node
         node.papi = self
         return node
@@ -47,7 +48,7 @@ class Papi:
     def _get_step(self, name) -> Step:
         step_object: Optional[Step] = self.config.get_step_by(name=name)
         if not step_object:
-            raise ValueError(f"no such step {name} in config")
+            raise MissingObject(f"no such step {name} in config", papi=self)
         return step_object
 
     def task(self, step: str, name: str = None) -> TaskNode:

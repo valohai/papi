@@ -7,6 +7,7 @@ from valohai_yaml.utils import listify
 
 from .base import PapiObject
 from .edges import EdgeDescriptor
+from .excs import MissingObject
 from .utils import compact_dict
 
 
@@ -71,12 +72,14 @@ class ExecutionNode(Node):
 
     def input(self, key: str) -> EdgeDescriptor:
         if key not in self.step.inputs:
-            raise ValueError(f"{key} not known in {self.step.name}")
+            raise MissingObject(f"{key} not known in {self.step.name}", papi=self.papi)
         return super().input(key)
 
     def _check_parameter_name(self, name):
         if name not in self.step.parameters:
-            raise ValueError(f"No such parameter {name}")
+            raise MissingObject(
+                f"No such parameter {name} in {self.step.name}", papi=self.papi
+            )
 
 
 class TaskNode(ExecutionNode):
