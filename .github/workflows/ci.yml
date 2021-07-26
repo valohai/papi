@@ -7,12 +7,11 @@ on:
     branches: [ master ]
 
 jobs:
-  Build:
+  Test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9]
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -32,9 +31,29 @@ jobs:
         key: poetry-${{ hashFiles('**/poetry.lock') }}
     - name: Install dependencies
       run: poetry install
+    - name: Run test
+      run: poetry run py.test --cov papi .
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install Poetry
+      uses: snok/install-poetry@v1.1.2
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: false
+        virtualenvs-path: ~/venvs
+    - name: Cache Poetry virtualenv
+      uses: actions/cache@v1
+      with:
+        path: ~/venvs
+        key: poetry-${{ hashFiles('**/poetry.lock') }}
+    - name: Install dependencies
+      run: poetry install
     - name: Run format check
       run: poetry run poe check-format
     - name: Run lint
       run: poetry run poe lint
-    - name: Run test
-      run: poetry run py.test --cov papi .
