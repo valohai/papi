@@ -78,3 +78,26 @@ class Papi:
             nodes=[n.to_yaml(yaml_context=yaml_context) for n in self.nodes.values()],
             edges=[e.to_yaml(yaml_context=yaml_context) for e in self.edges],
         )
+
+    def connect(
+        self,
+        *,
+        source_node: Node,
+        source_type: str,
+        source_key: str,
+        target_node: Node,
+        target_type: str,
+        target_key: str,
+    ) -> Edge:
+        # TODO: add validation
+        assert source_node.papi is target_node.papi is self
+        edge = Edge(
+            source_node=source_node.name,
+            source_type=source_type,
+            source_key=source_key,
+            target_node=target_node.name,
+            target_type=target_type,
+            target_key=target_key,
+        )
+        self.edges.append(edge)
+        return edge

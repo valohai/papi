@@ -42,15 +42,11 @@ class EdgeDescriptor:
     key: str
 
     def to(self, dest: "EdgeDescriptor"):
-        # TODO: add validation
-        assert self.node.papi is dest.node.papi
-        self.node.papi.edges.append(
-            Edge(
-                source_node=self.node.name,
-                source_type=self.type,
-                source_key=self.key,
-                target_node=dest.node.name,
-                target_type=dest.type,
-                target_key=dest.key,
-            )
+        return self.node.papi.connect(
+            source_node=self.node,
+            source_type=self.type,
+            source_key=self.key,
+            target_node=dest.node,
+            target_type=dest.type,
+            target_key=dest.key,
         )
