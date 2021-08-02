@@ -30,11 +30,14 @@ class ExecutionNode(Node):
     parameters: Dict[str, Any]
     inputs: Dict[str, Any]
 
-    def __init__(self, *, name: str, step: Step):
+    def __init__(self, *, name: str, step: Step, override: Optional[dict] = None):
         super().__init__(name=name)
         self.step = step
         self.parameters = {}
         self.inputs = {}
+        if override is None:
+            override = {}
+        self.override = override
 
     def parameter(self, name: str, value) -> "ExecutionNode":
         self._check_parameter_name(name)
@@ -54,6 +57,7 @@ class ExecutionNode(Node):
             for i in step_data.get("inputs", [])
         }
         step_data.pop("mounts", None)
+        step_data.update(self.override)
         return {
             "type": self.type,
             "name": self.name,
@@ -66,8 +70,7 @@ class ExecutionNode(Node):
 
     def to_yaml(self, yaml_context):
         return valohai_yaml.objs.ExecutionNode(
-            name=self.name,
-            step=self.step.name,
+            name=self.name, step=self.step.name, override=self.override
         )
 
     def input(self, key: str) -> EdgeDescriptor:

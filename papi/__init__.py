@@ -37,11 +37,13 @@ class Papi:
         node.papi = self
         return node
 
-    def execution(self, step: str, name: str = None):
+    def execution(self, step: str, name: str = None, override: dict = None):
         step_object = self._get_step(step)
         return self._register_node(
             ExecutionNode(
-                step=step_object, name=(name or self._count(step_object.name))
+                step=step_object,
+                name=(name or self._count(step_object.name)),
+                override=override,
             )
         )
 
