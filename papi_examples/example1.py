@@ -4,7 +4,7 @@ from papi import Papi
 from papi_examples.utils import read_config
 
 
-def main():
+def example1() -> Papi:
     papi = Papi(name="mypipeline", config=read_config("example1.yaml"))
 
     # Define nodes
@@ -26,6 +26,8 @@ def main():
     # Get Pipeline object for YAML
     papi.to_yaml()
 
+    return papi
+
 
 if __name__ == "__main__":
-    main()
+    example1()
