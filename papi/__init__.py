@@ -8,7 +8,9 @@ from papi.edges import Edge
 from papi.excs import DuplicateNode, MissingObject
 from papi.nodes import ExecutionNode, Node, TaskNode
 
-__all__ = ["Papi"]
+__all__ = ["Papi", "__version__"]
+
+__version__ = "0.1.3"
 
 SomeNode = TypeVar("SomeNode", bound=Node)
 

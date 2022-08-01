@@ -1,0 +1,9 @@
+black
+flake8
+flake8-bugbear
+flake8-print
+flake8-return
+flake8-simplify
+isort
+mypy
+types-PyYAML
