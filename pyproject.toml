@@ -1,3 +1,48 @@
 [build-system]
-requires = ["setuptools>=42"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "valohai-papi"
+description = "Experimental imperative Valohai pipeline API"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Aarni Koskela", email = "aarni@valohai.com" },
+]
+dependencies = [
+    "valohai-yaml>=0.14.1",
+]
+dynamic = ["version"]
+
+[dependency-groups]
+dev = [
+    "mypy",
+    "pytest-cov",
+    "ruff",
+    "types-PyYAML",
+]
+
+[tool.hatch.version]
+path = "papi/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["papi"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "I", "RET", "SIM", "T20", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"papi_examples/*" = ["T201", "T203"]
+
+[[tool.mypy.overrides]]
+module = "valohai_yaml.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "setuptools.*"
+ignore_missing_imports = true

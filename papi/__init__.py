@@ -1,5 +1,5 @@
 from collections import Counter
-from typing import Dict, List, Optional, TypeVar
+from typing import TypeVar
 
 from valohai_yaml.objs import Config, Pipeline, Step
 
@@ -10,14 +10,14 @@ from papi.nodes import ExecutionNode, Node, TaskNode
 
 __all__ = ["Papi", "__version__"]
 
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 
 SomeNode = TypeVar("SomeNode", bound=Node)
 
 
 class Papi:
-    nodes: Dict[str, Node]
-    edges: List[Edge]
+    nodes: dict[str, Node]
+    edges: list[Edge]
     counters: Counter
 
     def __init__(self, config: Config, *, name: str = "Pipeline"):
@@ -42,7 +42,7 @@ class Papi:
         node.papi = self
         return node
 
-    def execution(self, step: str, name: str = None, override: dict = None):
+    def execution(self, step: str, name: str | None = None, override: dict | None = None):
         step_object = self._get_step(step)
         return self._register_node(
             ExecutionNode(
@@ -53,18 +53,18 @@ class Papi:
         )
 
     def _get_step(self, name) -> Step:
-        step_object: Optional[Step] = self.config.get_step_by(name=name)
+        step_object: Step | None = self.config.get_step_by(name=name)
         if not step_object:
             raise MissingObject(f"no such step {name} in config", papi=self)
         return step_object
 
-    def task(self, step: str, name: str = None) -> TaskNode:
+    def task(self, step: str, name: str | None = None) -> TaskNode:
         step_object = self._get_step(step)
         return self._register_node(
             TaskNode(step=step_object, name=(name or self._count(step_object.name)))
         )
 
-    def to_api(self, api_context: Optional[APIContext] = None):
+    def to_api(self, api_context: APIContext | None = None):
         if not api_context:
             api_context = APIContext()
         return {
@@ -72,7 +72,7 @@ class Papi:
             "edges": [e.to_api(api_context=api_context) for e in self.edges],
         }
 
-    def to_yaml(self, yaml_context: YAMLContext = None):
+    def to_yaml(self, yaml_context: YAMLContext | None = None):
         if not yaml_context:
             yaml_context = YAMLContext()
         return Pipeline(
