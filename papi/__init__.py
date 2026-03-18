@@ -10,7 +10,7 @@ from papi.nodes import ExecutionNode, Node, TaskNode
 
 __all__ = ["Papi", "__version__"]
 
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 
 SomeNode = TypeVar("SomeNode", bound=Node)
 

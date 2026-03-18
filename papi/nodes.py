@@ -80,9 +80,7 @@ class ExecutionNode(Node):
 
     def _check_parameter_name(self, name):
         if name not in self.step.parameters:
-            raise MissingObject(
-                f"No such parameter {name} in {self.step.name}", papi=self.papi
-            )
+            raise MissingObject(f"No such parameter {name} in {self.step.name}", papi=self.papi)
 
 
 class TaskNode(ExecutionNode):
@@ -106,9 +104,7 @@ class TaskNode(ExecutionNode):
     def bayesian_tpe(self) -> "TaskNode":
         raise NotImplementedError("bayesian_tpe() is not implemented yet")
 
-    def linear_parameter(
-        self, name: str, *, min: float, max: float, step: float = 1
-    ) -> "TaskNode":
+    def linear_parameter(self, name: str, *, min: float, max: float, step: float = 1) -> "TaskNode":
         self._check_parameter_name(name)
         self.parameters[name] = {
             "style": "linear",

@@ -1,13 +1,13 @@
 all: format lint
 
 check-format:
-	black --check .
-	isort --check .
+	ruff format --check .
+	ruff check --select I --diff .
 
 format:
-	black .
-	isort .
+	ruff format .
+	ruff check --select I --fix .
 
 lint:
-	flake8 .
+	ruff check .
 	mypy .
