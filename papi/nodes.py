@@ -1,5 +1,5 @@
 from abc import ABCMeta
-from typing import Any, Dict, Optional
+from typing import Any
 
 import valohai_yaml
 from valohai_yaml.objs import Step
@@ -27,10 +27,10 @@ class Node(PapiObject, metaclass=ABCMeta):
 
 class ExecutionNode(Node):
     type = "execution"
-    parameters: Dict[str, Any]
-    inputs: Dict[str, Any]
+    parameters: dict[str, Any]
+    inputs: dict[str, Any]
 
-    def __init__(self, *, name: str, step: Step, override: Optional[dict] = None):
+    def __init__(self, *, name: str, step: Step, override: dict | None = None):
         super().__init__(name=name)
         self.step = step
         self.parameters = {}
@@ -86,8 +86,8 @@ class ExecutionNode(Node):
 class TaskNode(ExecutionNode):
     type = "task"
     task_type: str = "grid_search"
-    task_stop_expression: Optional[str] = None
-    task_configuration: Optional[dict] = None
+    task_stop_expression: str | None = None
+    task_configuration: dict | None = None
 
     def grid_search(self) -> "TaskNode":
         self.task_type = "grid_search"
@@ -136,9 +136,9 @@ class TaskNode(ExecutionNode):
         *,
         min: float,
         max: float,
-        count: Optional[int] = 1,
+        count: int | None = 1,
         integerify: bool = False,
-        seed: Optional[int] = None,
+        seed: int | None = None,
     ) -> "TaskNode":
         self._check_parameter_name(name)
         self.parameters[name] = {
